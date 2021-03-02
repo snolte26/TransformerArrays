@@ -1,4 +1,5 @@
 var wrapEle = document.body.querySelector(".wrapper");
+var submitEle = document.querySelector(".submit");
 
 var chrs = [
   {name:"Optimus Prime", class: "leader", afl:"autobot", vehicle:"truck"},
@@ -51,6 +52,20 @@ function createTransformers(list){
   wrapEle.appendChild(ele);
 }
 
-for(var i=0; i<chrs.length; i++){
-  createTransformers(chrs[i]);
+
+function starting(listChrs){
+  for(var i=0; i<listChrs.length; i++){
+    createTransformers(listChrs[i]);
+  }
 }
+
+function randomize(list){
+  list = list.sort(() => Math.random() - 0.5);
+  wrapEle.innerHTML = "";
+  starting(list);
+}
+starting(chrs);
+// waits for user to press the button, then runs randomize()
+submitEle.addEventListener("click", function () {
+  randomize(chrs);
+});
